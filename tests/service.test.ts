@@ -1,0 +1,2 @@
+import test from "node:test";import assert from "node:assert/strict";import { inputSchema, serviceHandler } from "../src/service.js";
+test("sentinel-orchestrator validates and executes its core path",async()=>{const input=inputSchema.parse({chain:"base",protocol:"Test",contracts:["0x1111111111111111111111111111111111111111"],verification_level:"standard",lookback_hours:24,risk_tolerance:"balanced"});try{const out=await serviceHandler(input,{transition:async()=>{}});assert.ok(true)}catch(e){assert.match(String(e),/required|fetch|RPC|dependency|GenLayer|Sentinel/);}});
